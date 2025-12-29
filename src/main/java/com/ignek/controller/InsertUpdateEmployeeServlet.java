@@ -6,6 +6,8 @@ import jakarta.servlet.http.*;
 import java.io.*;
 import java.sql.Date;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.ignek.constant.EmployeeConstant; 
 import com.ignek.dao.EmployeeDao; 
 import com.ignek.model.Employee; 
@@ -13,6 +15,7 @@ import com.ignek.model.Employee;
 @WebServlet("/InsertUpdateEmployeeServlet")
 public class InsertUpdateEmployeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LogManager.getLogger(InsertUpdateEmployeeServlet.class.getName());
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,6 +30,7 @@ public class InsertUpdateEmployeeServlet extends HttpServlet {
 
             request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         } catch (Exception e) {
+        	logger.warn("Unexcepted error occred in InsertUpdateEmployeeServlet get-request");
             e.printStackTrace();
         }
     }
@@ -65,11 +69,11 @@ public class InsertUpdateEmployeeServlet extends HttpServlet {
             if (status > 0) {
                 response.sendRedirect(request.getContextPath() + "/GetAllEmployeeServlet"); 
             } else {
-                out.print("<h4>Sorry, unable to save/update record</h4>");
+            	logger.info("Sorry, unable to save/update record");
             }
         } catch (Exception e) {
+        	logger.warn("Unexcepted error occred in InsertUpdateEmployeeServlet post-request");
             e.printStackTrace();
-            out.print("<h4>An unexpected error occurred.</h4>");
         } finally {
             out.close();
         }
