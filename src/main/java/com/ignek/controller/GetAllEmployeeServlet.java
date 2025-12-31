@@ -23,9 +23,8 @@ public class GetAllEmployeeServlet extends HttpServlet {
 			request.setAttribute(EmployeeConstant.EMPLOYEES, employees);
 			request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
 		} catch (Exception e) {
-			logger.warn("Unexcepted error occred in GetAllEmployeeServlet");
+			logger.error("Unexcepted error occred in GetAllEmployeeServlet");
 			e.printStackTrace();
 		}
-		
 	}
 }

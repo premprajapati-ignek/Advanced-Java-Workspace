@@ -16,19 +16,15 @@ public class DeleteEmployeeServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			PrintWriter out = response.getWriter();
 			int employeeId = Integer.parseInt(request.getParameter(EmployeeConstant.ID));
 			int status = EmployeeDao.deleteEmployee(employeeId);
-			
 			if(status > 0) {
 				response.sendRedirect(request.getContextPath() + "/GetAllEmployeeServlet");
-			}
-			else {
+			} else {
 				logger.info("Sorry, unable to delete record");
-				logger.warn("Unexcepted error occred in DeleteEmployeeServlet");
 			}
-			out.close();
 		} catch (Exception e) {
+			logger.error("Unexcepted error occred in DeleteEmployeeServlet");
 			e.printStackTrace();
 		}
 	}

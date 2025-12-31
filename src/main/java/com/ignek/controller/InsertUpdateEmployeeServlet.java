@@ -30,14 +30,13 @@ public class InsertUpdateEmployeeServlet extends HttpServlet {
 
             request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         } catch (Exception e) {
-        	logger.warn("Unexcepted error occred in InsertUpdateEmployeeServlet get-request");
+        	logger.error("Unexcepted error occred in InsertUpdateEmployeeServlet get-request");
             e.printStackTrace();
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
         try {
             String id = request.getParameter(EmployeeConstant.ID);
             String name = request.getParameter(EmployeeConstant.NAME);
@@ -72,10 +71,8 @@ public class InsertUpdateEmployeeServlet extends HttpServlet {
             	logger.info("Sorry, unable to save/update record");
             }
         } catch (Exception e) {
-        	logger.warn("Unexcepted error occred in InsertUpdateEmployeeServlet post-request");
+        	logger.error("Unexcepted error occred in InsertUpdateEmployeeServlet post-request");
             e.printStackTrace();
-        } finally {
-            out.close();
         }
     }
 }

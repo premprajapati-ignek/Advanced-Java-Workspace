@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn">
+<Configuration status="debug"> 
     <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout
-                pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
         </Console>
+        <RollingFile name="FileLogger"
+             fileName="/home/hp/Work/Training/Advance-Java/Servlet-JSP/eclipse-workspace/employee-portal/src/logs/app.log"
+             filePattern="/home/hp/Work/Training/Advance-Java/Servlet-JSP/eclipse-workspace/employee-portal/src/logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+		    <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+		    <Policies>
+		        <SizeBasedTriggeringPolicy size="5MB"/>
+		    </Policies>
+		    <DefaultRolloverStrategy max="10"/>
+		</RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="info" additivity="false">
-            <AppenderRef ref="console" />
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
         </Root>
     </Loggers>
 </Configuration>
