@@ -5,8 +5,12 @@ import com.ignek.constant.EmployeeConstant;
 import com.ignek.model.Employee;
 import java.sql.*;
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EmployeeDao {
+	private static final Logger logger = LogManager.getLogger(EmployeeDao.class.getName());
+	
 	public static int insertEmployee(Employee employee) {
 		int status = 0;
 		try {
@@ -22,7 +26,10 @@ public class EmployeeDao {
 			status = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
+			logger.info("Employee inserted successfully...");
+			logger.info("Connection is closed...");
 		} catch (Exception e) {
+			logger.error("Employee not inserted...");
 			e.printStackTrace();
 		}
 		return status;
@@ -49,7 +56,10 @@ public class EmployeeDao {
 			resultSet.close();
 			preparedStatement.close();
 			connection.close();
+			logger.info("Fetched All employees successfully...");
+			logger.info("Connection is closed...");
 		} catch (Exception e) {
+			logger.error("Employees not fetched...");
 			e.printStackTrace();
 		}
 		return employeeList;
@@ -76,7 +86,10 @@ public class EmployeeDao {
 			resultSet.close();
 			preparedStatement.close();
 			connection.close();
+			logger.info("Employee fetch by id successfully...");
+			logger.info("Connection is closed...");
 		} catch (Exception e) {
+			logger.error("Employee not fetched...");
 			e.printStackTrace();
 		}
 		return employee;
@@ -98,7 +111,10 @@ public class EmployeeDao {
 			status = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
+			logger.info("Employee updated successfully...");
+			logger.info("Connection is closed...");
 		} catch (Exception e) {
+			logger.error("Employee not updated...");
 			e.printStackTrace();
 		}
 		return status;
@@ -113,7 +129,10 @@ public class EmployeeDao {
 	        status = preparedStatement.executeUpdate();
 	        preparedStatement.close();
 	        connection.close();
+	        logger.info("Employee deleted successfully...");
+			logger.info("Connection is closed...");
 	    } catch (Exception e) {
+	    	logger.error("Employee not deleted...");
 	        e.printStackTrace();
 	    }
 	    return status;
