@@ -9,12 +9,12 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/employee-portal/CSS/style.css">
 </head>
-<body>
-	<div class="container-fluid w-100 bg-palettes-beige vh-100">
+<body class="bg-palettes-dark-green">
+	<div class="container-fluid">
         <div class="row">
             <div class="col-12 col-xl-4 py-2">
-                <div class="bg-palettes-dark-green rounded-1 p-3 text-palettes-black">
-                <div class="bg-palettes-light-green p-4 rounded">
+                <div class="bg-palettes-light-green rounded-1 p-3 ">
+                <div class="bg-palettes-beige p-4 rounded">
                 <c:set var="isUpdate" value="${employee != null}" />
                 <h5 class="mb-4 fw-bolder">
                     <c:choose>
@@ -23,22 +23,21 @@
                     </c:choose>
                 </h5>
                 
-                <form action="/employee-portal/InsertUpdateEmployeeServlet" method="post">
+               <form class="row g-2 needs-validation" action="/employee-portal/InsertUpdateEmployeeServlet" method="post" novalidate>
                     <input type="hidden" name="id" value="${isUpdate ? employee.id : 0}">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label id="name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" name="name" value="${employee.name}" required/>
+                        <div class="col-12">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" pattern="[a-zA-Z]+s" minlength="3" maxlength="50" value="${employee.name}" required/>
+                            <div class="valid-feedback">Name looks good!</div>
+                            <div class="invalid-feedback">please enter name / please enter valid name</div>
                         </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label id="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" name="email" value="${employee.email}" required/>
+                        <div class="col-12">
+                            <label for="email"  class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" maxlength="100" placeholder="abc@example.com" pattern=".+@.+\.com" value="${employee.email}" required/>
+                            <div class="valid-feedback">email looks good!</div>
+                            <div class="invalid-feedback">please enter email / please enter valid email</div>
                         </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
+                        <div class="col-12">
                             <label class="form-label">Gender:</label>
                             <div class="d-flex">
 	                            <div class="form-check me-4">
@@ -55,41 +54,37 @@
 		                        </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label id="joiningDate" class="form-label">Joining Date:</label>
-                            <input class="form-control" type="date" name="joiningDate" value="${employee.joiningDate}" required/>
+                        <div class="col-12">
+                            <label for="joiningDate" class="form-label">Joining Date:</label>
+                            <input class="form-control" type="date" id="joiningDate" name="joiningDate" max="${date}" value="${employee.joiningDate}" required/>
+                            <div class="invalid-feedback">Please choose a date.</div>
                         </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" id="age">Age:</label>
-                            <input class="form-control" type="number" name="age" min="1" value="${employee.age}" required/>
+                        <div class="col-md-6">
+                            <label for="age" class="form-label">Age:</label>
+                            <input class="form-control" id="age" type="number" name="age" min="18" max="55" value="${employee.age}" required/>
+                            <div class="invalid-feedback">please enter age / please enter valid age</div>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <label id="salary" class="form-label">Salary:</label>
-                            <input class="form-control" type="number" name="salary" min="0" value="${employee.salary}"/>
+                        <div class="col-md-6">
+                            <label for="salary" class="form-label">Salary:</label>
+                            <input class="form-control" type="number" id="salary" name="salary" min="5000" value="${employee.salary}" required/>
+                            <div class="invalid-feedback">please enter salary / please enter valid salary</div>
                         </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
+                        <div class="col-12">
                             <div class="form-check">
 	                            <label class="form-check-label" for="isFullTime">
-	                                isFullTime
+	                                Full-time
 	                            </label>
 	                            <input class="form-check-input" type="checkbox" name="isFullTime" id="isFullTime" value="1" ${employee.isFullTime ? 'checked' : ''}>
                         	</div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn bg-palettes-beige">${isUpdate ? 'Update' : 'Add'} Employee</button>
+                    <button type="submit" class="btn bg-palettes-dark-green col-12 text-white">${isUpdate ? 'Update' : 'Add'} Employee</button>
                 </form>
                 </div>
             </div>
             </div>
             <div class="col-12 col-xl-8 py-2">
-                <div class="bg-palettes-dark-green rounded-1 p-3 text-palettes-black h-100">
-                	<h5 class="mb-4 fw-bolder p-2 bg-palettes-light-green rounded">All Employee Details :</h5>
+                <div class="bg-palettes-light-green rounded-1 p-3  h-100">
+                	<h5 class="mb-4 fw-bolder p-2 bg-palettes-beige rounded">All Employee Details :</h5>
                     <table class="table table-striped rounded overflow-hidden table-warning">
                         <thead>
                             <tr>
@@ -117,21 +112,46 @@
                                     </small></td>
                                     <td><small class="text-nowrap">${employee.joiningDate}</small></td>
                                     <td><small class="text-nowrap">${employee.salary}</small></td>
-                                    <td><small class="text-nowrap">${employee.isFullTime}</small></td>
+                                    <td><small class="text-nowrap">
+                                    	<c:if test="${employee.isFullTime == true}">Yes</c:if>
+                                        <c:if test="${employee.isFullTime == false}">No</c:if>
+                                        </small></td>
                                     <td>
                                         <a class="btn btn-success btn-sm" href="InsertUpdateEmployeeServlet?id=${employee.id}">Edit</a> |
-                                        <a class="btn btn-danger btn-sm" href="/employee-portal/DeleteEmployeeServlet?id=${employee.id}">Delete</a>
+                                        <a class="btn btn-danger btn-sm" href="DeleteEmployeeServlet?id=${employee.id}">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
                     <div>
-                        <a class="btn bg-palettes-beige" href="GetAllEmployeeServlet">Add new employee</a>
+                        <a class="btn bg-palettes-dark-green text-white" href="GetAllEmployeeServlet">Add new employee</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>	
 </body>
+<script>
+//Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </html>
