@@ -7,16 +7,16 @@
 	<meta charset="UTF-8">
 	<title>Employee-portal</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/employee-portal/CSS/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
 </head>
-<body class="bg-palettes-dark-green">
+<body>
 	<div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-xl-4 py-2">
-                <div class="bg-palettes-light-green rounded-1 p-3 ">
-                <div class="bg-palettes-beige p-4 rounded">
+            <div class="col-12 col-xl-4 py-2 ">
+                <div class="rounded-1 p-3 border bg-palettes-col">
+                <div class="rounded">
                 <c:set var="isUpdate" value="${employee != null}" />
-                <h5 class="mb-4 fw-bolder">
+                <h5 class="mb-3 fw-bolder p-2">
                     <c:choose>
                         <c:when test="${isUpdate}">Edit employee details :</c:when>
                         <c:otherwise>Add employee details :</c:otherwise>
@@ -27,7 +27,7 @@
                     <input type="hidden" name="id" value="${isUpdate ? employee.id : 0}">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" pattern="[a-zA-Z]+s" minlength="3" maxlength="50" value="${employee.name}" required/>
+                            <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-z\s]+" minlength="3" maxlength="50" value="${employee.name}" required/>
                             <div class="valid-feedback">Name looks good!</div>
                             <div class="invalid-feedback">please enter name / please enter valid name</div>
                         </div>
@@ -77,15 +77,15 @@
 	                            <input class="form-check-input" type="checkbox" name="isFullTime" id="isFullTime" value="1" ${employee.isFullTime ? 'checked' : ''}>
                         	</div>
                         </div>
-                    <button type="submit" class="btn bg-palettes-dark-green col-12 text-white">${isUpdate ? 'Update' : 'Add'} Employee</button>
+                    <button type="submit" class="btn btn-secondary col-12 text-white">${isUpdate ? 'Update' : 'Add'} Employee</button>
                 </form>
                 </div>
             </div>
             </div>
-            <div class="col-12 col-xl-8 py-2">
-                <div class="bg-palettes-light-green rounded-1 p-3  h-100">
-                	<h5 class="mb-4 fw-bolder p-2 bg-palettes-beige rounded">All Employee Details :</h5>
-                    <table class="table table-striped rounded overflow-hidden table-warning">
+            <div class="col-12 col-xl-8 py-2 ">
+                <div class="rounded-1 p-3 h-100 border bg-palettes-col">
+                	<h5 class="mb-3 fw-bolder p-2">All Employee Details :</h5>
+                    <table class="table table-striped rounded overflow-hidden table-light">
                         <thead>
                             <tr>
                                 <th><small class="text-nowrap">ID</small></th>
@@ -125,7 +125,7 @@
                         </tbody>
                     </table>
                     <div>
-                        <a class="btn bg-palettes-dark-green text-white" href="GetAllEmployeeServlet">Add new employee</a>
+                        <a class="btn btn-secondary text-white" href="GetAllEmployeeServlet">Add new employee</a>
                     </div>
                 </div>
             </div>
