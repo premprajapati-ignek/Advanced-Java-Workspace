@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Employee-portal</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
@@ -12,7 +13,7 @@
 <body>
 	<div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-xl-4 py-2 ">
+            <div class="col-12 col-lg-4 py-2 ">
                 <div class="rounded-1 p-3 border bg-palettes-col">
                 <div class="rounded">
                 <c:set var="isUpdate" value="${employee != null}" />
@@ -82,49 +83,53 @@
                 </div>
             </div>
             </div>
-            <div class="col-12 col-xl-8 py-2 ">
+            <div class="col-12 col-lg-8 py-2">
                 <div class="rounded-1 p-3 h-100 border bg-palettes-col">
                 	<h5 class="mb-3 fw-bolder p-2">All Employee Details :</h5>
-                    <table class="table table-striped rounded overflow-hidden table-light">
+                	<div class="overflow-x-auto rounded">
+                    <table class="table table-striped rounded table-light overflow-hidden">
                         <thead>
                             <tr>
-                                <th><small class="text-nowrap">ID</small></th>
-                                <th><small class="text-nowrap">Name</small></th>
-                                <th><small class="text-nowrap">Email</small></th>
-                                <th><small class="text-nowrap">Age</small></th>
-                                <th><small class="text-nowrap">Gender</small></th>
-                                <th><small class="text-nowrap">Joining Date</small></th>
-                                <th><small class="text-nowrap">Salary</small></th>
-                                <th><small class="text-nowrap">IsFullTime</small></th>
-                                <th><small class="text-nowrap">IsFullTime</small>x</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th><span class="text-nowrap">Joining Date</span></th>
+                                <th>Salary</th>
+                                <th>IsFullTime</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="employee" items="${employees}">
                                 <tr>
-                                    <td><small class="text-nowrap">${employee.id}</small></td>
-                                    <td><small class="text-nowrap">${employee.name}</small></td>
-                                    <td><small class="text-nowrap">${employee.email}</small></td>
-                                    <td><small class="text-nowrap">${employee.age}</small></td>
-                                    <td><small class="text-nowrap">
+                                    <td>${employee.id}</td>
+                                    <td>${employee.name}</td>
+                                    <td>${employee.email}</td>
+                                    <td>${employee.age}</td>
+                                    <td>
                                         <c:if test="${employee.gender == 'M'}">Male</c:if>
                                         <c:if test="${employee.gender == 'F'}">Female</c:if>
-                                    </small></td>
-                                    <td><small class="text-nowrap">${employee.joiningDate}</small></td>
-                                    <td><small class="text-nowrap">${employee.salary}</small></td>
-                                    <td><small class="text-nowrap">
+                                    </td>
+                                    <td class="text-nowrap">${employee.joiningDate}</td>
+                                    <td>${employee.salary}</td>
+                                    <td>
                                     	<c:if test="${employee.isFullTime == true}">Yes</c:if>
                                         <c:if test="${employee.isFullTime == false}">No</c:if>
-                                        </small></td>
+                                    </td>
                                     <td>
-                                        <a class="btn btn-success btn-sm" href="InsertUpdateEmployeeServlet?id=${employee.id}">Edit</a> |
-                                        <a class="btn btn-danger btn-sm" href="DeleteEmployeeServlet?id=${employee.id}">Delete</a>
+                                    	<div class="text-nowrap">
+	                                    	<a class="btn btn-success btn-sm" href="InsertUpdateEmployeeServlet?id=${employee.id}">Edit</a> |
+	                                        <a class="btn btn-danger btn-sm" href="DeleteEmployeeServlet?id=${employee.id}">Delete</a>
+                                    	</div>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                    <div>
+                    </div>
+                    <div class="mt-3">
                         <a class="btn btn-secondary text-white" href="GetAllEmployeeServlet">Add new employee</a>
                     </div>
                 </div>
