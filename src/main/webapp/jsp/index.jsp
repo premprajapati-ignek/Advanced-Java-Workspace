@@ -28,7 +28,7 @@
                     <input type="hidden" name="id" value="${isUpdate ? employee.id : 0}">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-z\s]+" minlength="3" maxlength="50" value="${employee.name}" required/>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Firstname_Lastname" pattern="[A-Za-z\s]+" minlength="3" maxlength="50" value="${employee.name}" required/>
                             <div class="valid-feedback">Name looks good!</div>
                             <div class="invalid-feedback">please enter name / please enter valid name</div>
                         </div>
@@ -62,12 +62,12 @@
                         </div>
                         <div class="col-md-6">
                             <label for="age" class="form-label">Age:</label>
-                            <input class="form-control" id="age" type="number" name="age" min="18" max="55" value="${employee.age}" required/>
+                            <input class="form-control" id="age" type="number" name="age" placeholder="between 18 to 55" min="18" max="55" value="${employee.age}" required/>
                             <div class="invalid-feedback">please enter age / please enter valid age</div>
                         </div>
                         <div class="col-md-6">
                             <label for="salary" class="form-label">Salary:</label>
-                            <input class="form-control" type="number" id="salary" name="salary" min="5000" value="${employee.salary}" required/>
+                            <input class="form-control" type="number" id="salary" name="salary" placeholder="more than 5000" min="5000" value="${employee.salary}" required/>
                             <div class="invalid-feedback">please enter salary / please enter valid salary</div>
                         </div>
                         <div class="col-12">
