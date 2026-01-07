@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,9 @@ public class InsertUpdateEmployeeServlet extends HttpServlet {
 
             List<Employee> employees = EmployeeDao.getAllEmployees();
             request.setAttribute(EmployeeConstant.EMPLOYEES, employees);
+            
+            LocalDate date = LocalDate.now();
+			request.setAttribute(EmployeeConstant.DATE, date);
 
             request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         } catch (Exception e) {

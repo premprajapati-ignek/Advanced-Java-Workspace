@@ -20,4 +20,5 @@ public class EmployeeConstant {
 	public static String JOINING_DATE = "joiningDate";
 	public static String SALARY = "salary";
 	public static String IS_FULL_TIME = "isFullTime";
+	public static String DATE = "date";
 }

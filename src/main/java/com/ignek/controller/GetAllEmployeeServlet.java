@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,8 @@ public class GetAllEmployeeServlet extends HttpServlet {
 		try {
 			List<Employee> employees = EmployeeDao.getAllEmployees();
 			request.setAttribute(EmployeeConstant.EMPLOYEES, employees);
+			LocalDate date = LocalDate.now();
+			request.setAttribute(EmployeeConstant.DATE, date);
 			request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			logger.error("Unexcepted error occred in GetAllEmployeeServlet");
